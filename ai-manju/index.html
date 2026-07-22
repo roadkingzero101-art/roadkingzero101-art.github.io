@@ -2,6 +2,8 @@
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; media-src 'self' data: blob:; frame-src 'none'; form-action 'none'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
+    <meta name="referrer" content="no-referrer">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AI漫剧整本生产线</title>
     <link rel="stylesheet" href="styles.css">
@@ -171,7 +173,7 @@
             <button type="button" id="copyAllButton" title="复制全集生产包">⎘ 全集</button>
             <button type="button" id="exportMdButton" title="导出 Markdown">⇩ MD</button>
             <button type="button" id="exportJsonButton" title="导出 JSON">⇩ JSON</button>
-            <a class="button-link" href="https://chatgpt.com/" target="_blank" rel="noopener" title="打开 ChatGPT">↗ ChatGPT</a>
+            <a class="button-link" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer" title="打开 ChatGPT">↗ ChatGPT</a>
           </div>
         </header>
 

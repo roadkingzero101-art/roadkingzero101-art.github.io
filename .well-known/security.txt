@@ -1,0 +1,4 @@
+Contact: mailto:roadkingzero101@gmail.com
+Expires: 2027-07-01T00:00:00Z
+Preferred-Languages: zh, en
+Canonical: https://maxlzy.me/.well-known/security.txt
