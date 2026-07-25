@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; media-src 'self' data: blob:; frame-src 'none'; form-action 'none'; manifest-src 'self'; worker-src 'self' blob:; upgrade-insecure-requests">
+    <meta name="referrer" content="no-referrer">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="一个从故事梗概到分集、分镜与质检清单的互动式内容生产工作台案例。">
+    <meta name="theme-color" content="#080a0f">
+    <title>FRAMEFLOW｜漫剧制作控制台</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#workspace">跳到制作区 / Skip to workspace</a>
+
+    <div class="ambient ambient-one" aria-hidden="true"></div>
+    <div class="ambient ambient-two" aria-hidden="true"></div>
+    <div class="grid-field" aria-hidden="true"></div>
+
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="wordmark" href="/" aria-label="返回李振宇个人网站">
+          <span class="wordmark-mark" aria-hidden="true">
+            <i></i><i></i><i></i>
+          </span>
+          <span>
+            <strong>FRAMEFLOW</strong>
+            <small>PRODUCTION CONTROL</small>
+          </span>
+        </a>
+
+        <div class="topbar-meta">
+          <span class="signal"><i></i> SYSTEM READY</span>
+          <a href="/">返回作品集 / Portfolio</a>
+        </div>
+      </header>
+
+      <main>
+        <section class="intro">
+          <div class="intro-copy">
+            <p class="kicker"><span>CASE 01</span> INTERACTIVE PRODUCTION WORKFLOW</p>
+            <h1>把故事，变成<br><em>可执行的制作蓝图。</em></h1>
+            <p class="intro-lead">
+              从内容输入到分集节奏、镜头规划与交付质检，一套面向漫剧项目的端到端工作流。
+              <span>From story brief to a production-ready episode system.</span>
+            </p>
+            <div class="intro-tags" aria-label="案例能力">
+              <span>内容结构</span>
+              <span>分镜规划</span>
+              <span>交付质检</span>
+              <span>数据导出</span>
+            </div>
+          </div>
+
+          <figure class="cover-card">
+            <img src="assets/studio-cover.png" alt="漫剧内容从手稿进入分镜与制作时间线的工作台视觉">
+            <figcaption>
+              <span>FRAMEFLOW / 01</span>
+              <strong>CONTENT → SHOT → DELIVERY</strong>
+            </figcaption>
+          </figure>
+        </section>
+
+        <section id="workspace" class="workspace">
+          <aside class="control-card">
+            <div class="card-heading">
+              <div>
+                <p>INPUT CONSOLE</p>
+                <h2>项目输入</h2>
+              </div>
+              <span>01</span>
+            </div>
+
+            <form id="projectForm" autocomplete="off">
+              <label class="field">
+                <span class="field-label">
+                  <b>项目名称</b>
+                  <small>PROJECT TITLE</small>
+                </span>
+                <input id="projectTitle" name="projectTitle" type="text" maxlength="60" placeholder="例如：雾港来信" required>
+              </label>
+
+              <label class="field">
+                <span class="field-label">
+                  <b>故事梗概</b>
+                  <small>STORY BRIEF</small>
+                </span>
+                <textarea id="sourceBrief" name="sourceBrief" maxlength="3000" placeholder="写下主角、目标、阻力与关键转折。内容会在当前浏览器内整理成制作方案。" required></textarea>
+                <span class="counter"><b id="briefCount">0</b> / 3000</span>
+              </label>
+
+              <div class="field-grid">
+                <label class="field">
+                  <span class="field-label">
+                    <b>集数</b>
+                    <small>EPISODES</small>
+                  </span>
+                  <input id="episodeCount" name="episodeCount" type="number" min="3" max="24" value="6" required>
+                </label>
+
+                <label class="field">
+                  <span class="field-label">
+                    <b>单集时长</b>
+                    <small>DURATION</small>
+                  </span>
+                  <select id="episodeDuration" name="episodeDuration">
+                    <option value="60">60 秒</option>
+                    <option value="90" selected>90 秒</option>
+                    <option value="120">120 秒</option>
+                    <option value="180">180 秒</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="field-grid">
+                <label class="field">
+                  <span class="field-label">
+                    <b>视觉风格</b>
+                    <small>VISUAL STYLE</small>
+                  </span>
+                  <select id="visualStyle" name="visualStyle">
+                    <option value="赛博悬疑">赛博悬疑</option>
+                    <option value="都市写实">都市写实</option>
+                    <option value="东方奇幻">东方奇幻</option>
+                    <option value="复古浪漫">复古浪漫</option>
+                  </select>
+                </label>
+
+                <label class="field">
+                  <span class="field-label">
+                    <b>画幅</b>
+                    <small>FRAME</small>
+                  </span>
+                  <select id="aspectRatio" name="aspectRatio">
+                    <option value="9:16" selected>9:16 竖屏</option>
+                    <option value="16:9">16:9 横屏</option>
+                    <option value="1:1">1:1 方形</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="field" role="group" aria-labelledby="storyToneLabel">
+                <span id="storyToneLabel" class="field-label">
+                  <b>叙事气质</b>
+                  <small>STORY TONE</small>
+                </span>
+                <div class="choice-row">
+                  <label><input type="radio" name="storyTone" value="高能反转" checked><span>高能反转</span></label>
+                  <label><input type="radio" name="storyTone" value="情绪推进"><span>情绪推进</span></label>
+                  <label><input type="radio" name="storyTone" value="电影质感"><span>电影质感</span></label>
+                </div>
+              </div>
+
+              <label class="field">
+                <span class="field-label">
+                  <b>制作备注</b>
+                  <small>PRODUCTION NOTES</small>
+                </span>
+                <textarea id="productionNotes" name="productionNotes" class="short-textarea" maxlength="500" placeholder="可选：角色限制、场景要求、交付重点……"></textarea>
+              </label>
+
+              <div class="form-actions">
+                <button class="button button-primary" type="submit">
+                  <span>生成制作方案</span>
+                  <small>BUILD PLAN</small>
+                </button>
+                <button id="sampleButton" class="button button-secondary" type="button">
+                  <span>载入样例</span>
+                  <small>LOAD SAMPLE</small>
+                </button>
+                <button id="clearButton" class="button button-quiet" type="button" aria-label="清空所有输入和结果">
+                  清空 / RESET
+                </button>
+              </div>
+            </form>
+
+            <p class="privacy-note">
+              <span aria-hidden="true">◆</span>
+              本地交互演示 · 输入内容不会离开当前浏览器
+            </p>
+          </aside>
+
+          <div class="result-card">
+            <div class="result-topline">
+              <div>
+                <p>OUTPUT MATRIX</p>
+                <h2>制作蓝图</h2>
+              </div>
+
+              <div class="result-actions">
+                <span id="systemStatus" class="status-pill" aria-live="polite"><i></i> WAITING</span>
+                <button id="exportJson" type="button" disabled>JSON</button>
+                <button id="exportMarkdown" type="button" disabled>MARKDOWN</button>
+              </div>
+            </div>
+
+            <div class="metrics" aria-label="制作指标">
+              <article>
+                <small>EPISODES</small>
+                <strong id="episodeMetric">—</strong>
+                <span>分集数量</span>
+              </article>
+              <article>
+                <small>SHOT CARDS</small>
+                <strong id="shotMetric">—</strong>
+                <span>镜头卡片</span>
+              </article>
+              <article>
+                <small>RUNTIME</small>
+                <strong id="runtimeMetric">—</strong>
+                <span>预计总时长</span>
+              </article>
+              <article>
+                <small>READINESS</small>
+                <strong id="readinessMetric">—</strong>
+                <span>制作就绪度</span>
+              </article>
+            </div>
+
+            <div class="tabbar" role="tablist" aria-label="制作方案视图">
+              <button id="episodesTab" class="tab is-active" type="button" role="tab" aria-selected="true" aria-controls="episodesPanel" data-panel="episodesPanel">
+                <span>01</span> 分集结构 / EPISODES
+              </button>
+              <button id="shotsTab" class="tab" type="button" role="tab" aria-selected="false" aria-controls="shotsPanel" data-panel="shotsPanel">
+                <span>02</span> 分镜清单 / SHOTS
+              </button>
+              <button id="reviewTab" class="tab" type="button" role="tab" aria-selected="false" aria-controls="reviewPanel" data-panel="reviewPanel">
+                <span>03</span> 交付质检 / REVIEW
+              </button>
+            </div>
+
+            <div class="panel-stack">
+              <section id="episodesPanel" class="tab-panel is-active" role="tabpanel" aria-labelledby="episodesTab">
+                <div class="empty-state">
+                  <span class="empty-orbit" aria-hidden="true"><i></i></span>
+                  <p>READY FOR INPUT</p>
+                  <h3>填入故事梗概，开始搭建制作蓝图</h3>
+                  <span>Complete the brief to reveal the episode system.</span>
+                </div>
+              </section>
+
+              <section id="shotsPanel" class="tab-panel" role="tabpanel" aria-labelledby="shotsTab" hidden></section>
+              <section id="reviewPanel" class="tab-panel" role="tabpanel" aria-labelledby="reviewTab" hidden></section>
+            </div>
+          </div>
+        </section>
+
+        <section class="case-notes">
+          <div>
+            <p>DESIGN INTENT</p>
+            <h2>不是一张表，而是一条能跑通的生产链。</h2>
+          </div>
+          <div class="note-grid">
+            <article><span>01</span><h3>结构化输入</h3><p>用关键创作参数约束项目边界，让需求在进入制作前就清晰可检验。</p></article>
+            <article><span>02</span><h3>节奏可视化</h3><p>把每集钩子、冲突、转折与悬念拆成可浏览、可讨论的内容单元。</p></article>
+            <article><span>03</span><h3>交付标准化</h3><p>将镜头规划与质检规则一起交付，减少创意、制作与审核之间的信息损耗。</p></article>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <span>© 2026 ZHENYU LI</span>
+        <span>PRODUCT ENGINEERING · CONTENT SYSTEMS</span>
+      </footer>
+    </div>
+  </body>
+</html>
